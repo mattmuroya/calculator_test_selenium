@@ -1,11 +1,14 @@
-"""Test suite for the Calculator app.
+"""Define and execute test cases and parameters (test data) for the Calculator app.
 """
 
-from utils.driver import create_driver
-from utils.output import print_test_begin, print_test_end
+# Import test utilities
+from utils.webdriver import create_driver
+from utils.test_runner import execute_tests
+
+# Import page object classes
 from pages.calculator import CalculatorPage
 
-# Test cases
+# ==================== Define test cases ====================
 
 def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_are_valid):
     """Tests basic calculator operations with valid or invalid inputs.
@@ -29,33 +32,32 @@ def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_
     # Quit driver
     driver.quit()
 
-# Test data
+# def test_case_2():
+#     pass
 
-test_data_1 = [
-    ("Add", "15", "30", "45", True),
-    ("Add", "5", "Five", "Number 2 is not a number", False),
-    # ("Subtract", "15", "40", "-25", True),
-    # ("Multiply", "8", "8", "64", True),
-    # ("Divide", "12", "3", "4", True),
-    # ("Concatenate", "12", "34", "1234", True),
-]
+# def test_case_3():
+#     pass
 
-# Execute test suite
+# ========== Define parameter sets and execute test suite ==========
 
 if __name__ == "__main__":
-    passed = 0
-    total = len(test_data_1)
-
-    print_test_begin()
-
-    for data_set in test_data_1:
-        try:
-            test_calculator_operations(*data_set)
-            print("PASS", "Test calculator operations")
-            passed += 1
-        except AssertionError:
-            print("FAIL", "Test calculator operations:", data_set)
-
-    # Insert additional test definitions here
-
-    print_test_end(passed, total)
+    execute_tests([
+        (test_calculator_operations, [
+            ("Add", "15", "30", "45", True),
+            ("Add", "5", "Five", "Number 2 is not a number", False),
+            # ("Subtract", "15", "40", "-25", True),
+            # ("Multiply", "8", "8", "64", True),
+            # ("Divide", "12", "3", "4", True),
+            # ("Concatenate", "12", "34", "1234", True),
+        ]),
+        # (test_case_2, [
+        #     (),
+        #     (),
+        #     (),
+        # ]),
+        # (test_case_2, [
+        #     (),
+        #     (),
+        #     (),
+        # ]),
+    ])

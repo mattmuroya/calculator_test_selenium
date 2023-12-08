@@ -2,8 +2,11 @@
 """
 
 def print_test_begin():
-    print("\n===== BEGINNING TEST EXECUTION =====\n")
+    print("\n============== BEGINNING TEST EXECUTION ===============\n")
 
 def print_test_end(passed, total):
-    percent = format(passed /total, ".0%")
-    print(f"\n===== TEST EXECUTION COMPLETE: {passed} / {total} ({percent}) PASSED =====\n")
+    if total > 0:
+        percent = format(passed / total, ".0%")
+        print(f"\n===== TEST EXECUTION COMPLETE: {passed} / {total} ({percent}) PASSED =====\n")
+    else:
+        print("\n===== TEST EXECUTION COMPLETE: NO TESTS FOUND =====\n")

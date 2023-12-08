@@ -8,7 +8,9 @@ def create_driver(browser):
     """
 
     # Initialize driver
-    if browser == "Firefox":
+    if browser == "Chrome":
+        driver = selenium.webdriver.Chrome()
+    elif browser == "Firefox":
         driver = selenium.webdriver.Firefox()
     elif browser == "Edge":
         driver = selenium.webdriver.Edge()
