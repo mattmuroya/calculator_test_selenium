@@ -2,6 +2,7 @@
 """
 
 from utils.output import print_test_begin, print_test_end
+import time, datetime
 
 def execute_test_case(test, param_sets):
     """Takes a test definition, a list of parameter sets, and passed/total
@@ -26,14 +27,17 @@ def execute_tests(test_cases):
     """Takes a list of tuples, each of which contains a test case and list of
     parameter sets, and executes each pair in sequence.
     """
+
     passed = 0
     total = 0
 
     print_test_begin()
+    t0 = time.time()
 
     for test_case in test_cases:
         d_passed, d_total = execute_test_case(test_case[0], test_case[1])
         passed += d_passed
         total += d_total
 
-    print_test_end(passed, total)
+    t1 = time.time()
+    print_test_end(passed, total, datetime.timedelta(seconds=int(t1-t0)))
