@@ -1,6 +1,7 @@
-"""Page object class for the Calculator app.
+"""Define element locators and page interaction methods for the Calculator app.
 """
 
+# Import Selenium WebDriver methods
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -8,19 +9,14 @@ from selenium.webdriver.support.select import Select
 class CalculatorPage:
     """Page object class for the Calculator app.
     """
-
     # Class variables
-
     url = "https://testsheepnz.github.io/BasicCalculator.html"
 
     # Initializer
-
     def __init__(self, driver):
-        """Takes a driver and initializes the page object
-        """
         self._driver = driver
 
-    # Page interaction methods
+    # ===== Page interaction methods =====
 
     def load(self):
         """Loads the page at the class url using the driver
