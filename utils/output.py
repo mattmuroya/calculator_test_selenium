@@ -1,4 +1,4 @@
-"""Methods for printing test results.
+"""Functions for printing test results.
 """
 
 def print_test_begin():

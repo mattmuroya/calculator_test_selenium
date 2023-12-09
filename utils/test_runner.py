@@ -27,7 +27,6 @@ def execute_tests(test_cases):
     """Takes a list of tuples, each of which contains a test case and list of
     parameter sets, and executes each pair in sequence.
     """
-
     passed = 0
     total = 0
 
