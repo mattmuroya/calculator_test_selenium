@@ -2,7 +2,6 @@
 """
 
 # Import test utilities
-from utils.webdriver import create_driver
 from utils.test_runner import execute_tests
 
 # Import page object classes
@@ -10,13 +9,12 @@ from pages.calculator import CalculatorPage
 
 # ==================== Define test cases ====================
 
-def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_are_valid):
+def test_calculator_operations(browser, operation, arg_1, arg_2, expected_result, inputs_are_valid):
     """Executes a basic calculator operation with two valid or invalid inputs
     and verifies the result.
     """
-    # Initialize driver and page object
-    driver = create_driver("Chrome")
-    calculator = CalculatorPage(driver)
+    # Initialize page object
+    calculator = CalculatorPage(browser)
 
     # Execute test steps
     calculator.load()
@@ -33,26 +31,23 @@ def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_
         error_message = calculator.get_error_message()
         assert error_message == expected_result
 
-    # Quit driver
-    driver.quit()
-
 # def test_case_2():
 #     pass
 
 # def test_case_3():
 #     pass
 
-# ========== Define parameter sets and execute test suite ==========
+# ========== Define parameter groups and execute test suite ==========
 
 if __name__ == "__main__":
     execute_tests([
         (test_calculator_operations, [
-            ("Add", "15", "30", "45", True),
-            ("Add", "5", "Five", "Number 2 is not a number", False),
-            # ("Subtract", "15", "40", "-25", True),
-            # ("Multiply", "8", "8", "64", True),
-            # ("Divide", "12", "3", "4", True),
-            # ("Concatenate", "12", "34", "1234", True),
+            ("Chrome", "Add", "15", "30", "45", True),
+            ("Chrome", "Add", "5", "Five", "Number 2 is not a number", False),
+            # ("Chrome", "Subtract", "15", "40", "-25", True),
+            # ("Chrome", "Multiply", "8", "8", "64", True),
+            # ("Chrome", "Divide", "12", "3", "4", True),
+            # ("Chrome", "Concatenate", "12", "34", "1234", True),
         ]),
         # (test_case_2, [
         #     (),
