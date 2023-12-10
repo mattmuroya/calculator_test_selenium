@@ -1,4 +1,4 @@
-"""Define and execute test cases and parameters (test data) for the Calculator app.
+"""Test suite for https://testsheepnz.github.io/BasicCalculator.html
 """
 
 # Import test utilities
@@ -11,7 +11,8 @@ from pages.calculator import CalculatorPage
 # ==================== Define test cases ====================
 
 def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_are_valid):
-    """Tests basic calculator operations with valid or invalid inputs.
+    """Executes a basic calculator operation with two valid or invalid inputs
+    and verifies the result.
     """
     # Initialize driver and page object
     driver = create_driver("Chrome")
@@ -19,12 +20,15 @@ def test_calculator_operations(operation, arg_1, arg_2, expected_result, inputs_
 
     # Execute test steps
     calculator.load()
-    calculator.execute_calculation(operation, arg_1, arg_2)
+    calculator.set_operation_dropdown(operation)
+    calculator.enter_first_number(arg_1)
+    calculator.enter_second_number(arg_2)
+    calculator.click_calculate_button()
 
     # Assert results
     if inputs_are_valid:
-        result = calculator.get_result()
-        assert result == expected_result
+        answer = calculator.get_answer()
+        assert answer == expected_result
     else:
         error_message = calculator.get_error_message()
         assert error_message == expected_result

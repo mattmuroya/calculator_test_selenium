@@ -1,53 +1,75 @@
-"""Define element locators and page interaction methods for the Calculator app.
+"""Page object class for https://testsheepnz.github.io/BasicCalculator.html
 """
 
 # Import Selenium WebDriver methods
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-
 class CalculatorPage:
-    """Page object class for the Calculator app.
+    """Defines element locators and page interaction methods for the Basic
+    Calculator app.
     """
-    # Class variables
+    # =============== Initialization / class variables ===============
+
     url = "https://testsheepnz.github.io/BasicCalculator.html"
 
-    # Initializer
-    def __init__(self, driver):
-        self._driver = driver
+    # Element locators
 
-    # ===== Page interaction methods =====
+    number_1_field = (By.ID, "number1Field")
+    number_2_field = (By.ID, "number2Field")
+    operation_dropdown = (By.ID, "selectOperationDropdown")
+    calculate_button = (By.ID, "calculateButton")
+    answer_field = (By.ID, "numberAnswerField")
+    error_message_field = (By.ID, "errorMsgField")
+
+    # Initializer
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    # ==================== Page interaction methods ====================
 
     def load(self):
-        """Loads the page at the class url using the driver
+        """Loads the page URL.
         """
-        self._driver.get(self.url)
+        self.driver.get(self.url)
 
-    def execute_calculation(self, operation, arg_1, arg_2):
-        """Takes two arguments and an operation type (Add, Subtract, Multiply,
-        Divide, or Concatenate), inputs those values on the page, and executes
-        the calculation.
+    # Input methods
+
+    def enter_first_number(self, text):
+        """Enters a text value into the 'First number' field.
         """
-        # Identify page elements
-        input_1 = self._driver.find_element(By.ID, "number1Field")
-        input_2 = self._driver.find_element(By.ID, "number2Field")
-        operation_dropdown = Select(self._driver.find_element(By.ID, "selectOperationDropdown"))
-        calculate_button = self._driver.find_element(By.ID, "calculateButton")
+        field = self.driver.find_element(*self.number_1_field)
+        field.send_keys(text)
 
-        # Execute WebDriver calls
-        input_1.send_keys(arg_1)
-        input_2.send_keys(arg_2)
-        operation_dropdown.select_by_visible_text(operation)
-        calculate_button.click()
-
-    def get_result(self):
-        """Reads and returns the value in the answer field.
+    def enter_second_number(self, text):
+        """Enters a text value into the 'Second number' field.
         """
-        answer = self._driver.find_element(By.ID, "numberAnswerField")
+        field = self.driver.find_element(*self.number_2_field)
+        field.send_keys(text)
+
+    def set_operation_dropdown(self, operation):
+        """Sets the Operation dropdown to the specified text value.
+        """
+        dropdown = Select(self.driver.find_element(*self.operation_dropdown))
+        dropdown.select_by_visible_text(operation)
+
+    def click_calculate_button(self):
+        """Clicks the Calculate button.
+        """
+        calc_btn = self.driver.find_element(*self.calculate_button)
+        calc_btn.click()
+
+    # Read methods
+
+    def get_answer(self):
+        """Returns the text value of the Answer field.
+        """
+        answer = self.driver.find_element(*self.answer_field)
         return answer.get_attribute('value')
 
     def get_error_message(self):
-        """Reads and returns the in-app error message.
+        """Reads and returns the text value of the error message banner.
         """
-        error = self._driver.find_element(By.ID, "errorMsgField")
-        return error.text
+        error_message = self.driver.find_element(*self.error_message_field)
+        return error_message.text
