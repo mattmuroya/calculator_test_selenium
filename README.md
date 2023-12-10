@@ -2,8 +2,8 @@
 
 This repository contains a basic Python/Selenium WebDriver UI test automation
 framework that does not depend on a preexisting test framework library (e.g.
-Pytest). The sample tests use this
-[online calculator application](https://testsheepnz.github.io/BasicCalculator.html),
+Pytest). The sample tests use
+[this online calculator application](https://testsheepnz.github.io/BasicCalculator.html),
 however you can test any web page by creating page objects/interaction methods
 in the `Pages` directory.
 
@@ -51,10 +51,10 @@ local machine:
    $ pip -r requirements.txt
    ```
 
-5. Execute the test suite:
+5. Execute the main test script:
 
    ```console
-   $ python test_calculator.py
+   $ python main.py
    ```
 
 The console prints individual results as tests finish executing. After all tests
@@ -68,49 +68,58 @@ Object Model (POM) design pattern.
 ```
 calculator_test_selenium/
 ├─ pages/
-│  ├─ calculator.py
+│  ├─ calculator_page.py
+│  ├─ page_2.py
+│  └─ page_3.py
+├─ tests/
+│  ├─ calculator_tests.py
 │  ├─ page_2.py
 │  └─ page_3.py
 ├─ utils/
 │  ├─ output_py
 │  ├─ test_runner.py
 │  └─ webdriver.py
-├─ test_calculator.py
-├─ test_suite_2.py
-└─ test_suite_3.py
+└─ main.py
 ```
+
+### `main.py`
+
+`main.py` is the main test execution script. This file defines which test suites
+(and which tests cases from each of those suites) are run. This file also
+defines the parameter groups (data sets) to be run with each test case. Each
+test case will execute once for every parameter group defined for it in the
+`execute_tests` block in this file.
 
 ### Pages
 
-Each file in the `pages` directory contains a class representing a web page to
-be tested. The class contains all of the element locators and interaction
-methods (WebDriver calls) for that page. The actual test scripts will call these
-methods to interact with elements on the webpage.
+Each file in the `pages` directory contains an object class that represents a
+web page to be tested. The class contains all of the individual element locators
+and interaction methods (WebDriver calls) for that page.
 
-The sample page file `calculator.py` contains the `CalculatorPage` class which
-represents
+The sample page file `calculator_page.py` contains the `CalculatorPage` class
+which represents
 [this online calculator application](https://testsheepnz.github.io/BasicCalculator.html).
 It contains methods for loading the url, entering values into the number fields,
 executing calculations, retrieving the contents of the result field, and reading
 the error message banner.
 
-As your application/test suite grows, you can add new pages to the directory and
-define new element locators/interaction methods for existing pages.
+You can add new pages to the directory and define new element
+locators/interaction methods for existing pages.
 
-### Test Suites
+### Tests
 
-Test suite files contain the actual test scripts and are placed in the root
-directory. Each test suite imports one or more page object classes from the
-`pages` directory, then uses the interaction methods from that page to define
-the test cases. Each test case can be executed multiple times with different
-browsers and/or parameters (defined at the bottom file).
+Each file in the `tests` directory contains an object class that represents a
+test suite comprising related test case definitions (methods). Each test suite
+imports one or more page object classes from the `pages` directory, and the test
+case definitions use methods from the page object to script out the actual test
+steps.
 
-The sample test suite `test_calculator.py` imports the `CalculatorPage` page and
-defines just one test `test_calculator_operations`. To include a test definition
-in the actual script execution, add it to the `execute_tests` block at the
-bottom of the page along with one or more groups of parameters to run with that
-test. When you execute `test_calculator.py`, the script runs each test for every
-group of parameters associated with it.
+The sample test suite `calculator_tests.py` imports the `CalculatorPage` class
+and uses the page interaction methods to define the one test `test_operations`
+test case definition.
+
+You can reuse the page interaction methods to create new test cases and modify
+the existing tests.
 
 ### Utils
 
