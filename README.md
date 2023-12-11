@@ -54,7 +54,7 @@ local machine:
 5. Execute the test suite:
 
    ```console
-   $ python test_calculator.py
+   $ python calculator_tests.py
    ```
 
 The console prints individual results as tests finish executing. After all tests
@@ -68,16 +68,18 @@ Object Model (POM) design pattern.
 ```
 calculator_test_selenium/
 ├─ pages/
-│  ├─ calculator.py
+│  ├─ calculator_page.py
 │  ├─ page_2.py
-│  └─ page_3.py
+│  ├─ page_3.py
+│  └─ [...].py
 ├─ utils/
 │  ├─ output_py
 │  ├─ test_runner.py
 │  └─ webdriver.py
-├─ test_calculator.py
-├─ test_suite_2.py
-└─ test_suite_3.py
+├─ calculator_tests.py
+├─ suite_2_tests.py
+├─ suite_3_tests.py
+└─ [...].py
 ```
 
 ### Pages
@@ -87,8 +89,8 @@ be tested. The class contains all of the element locators and interaction
 methods (WebDriver calls) for that page. The actual test scripts will call these
 methods to interact with elements on the webpage.
 
-The sample page file `calculator.py` contains the `CalculatorPage` class which
-represents
+The sample page file `calculator_page.py` contains the `CalculatorPage` class
+which represents
 [this online calculator application](https://testsheepnz.github.io/BasicCalculator.html).
 It contains methods for loading the url, entering values into the number fields,
 executing calculations, retrieving the contents of the result field, and reading
@@ -105,12 +107,12 @@ directory. Each test suite imports one or more page object classes from the
 the test cases. Each test case can be executed multiple times with different
 browsers and/or parameters (defined at the bottom file).
 
-The sample test suite `test_calculator.py` imports the `CalculatorPage` page and
-defines just one test `test_calculator_operations`. To include a test definition
-in the actual script execution, add it to the `execute_tests` block at the
-bottom of the page along with one or more groups of parameters to run with that
-test. When you execute `test_calculator.py`, the script runs each test for every
-group of parameters associated with it.
+The sample test suite `calculator_tests.py` imports the `CalculatorPage` page
+and defines just one test `test_calculator_operations`. To include a test
+definition in the actual script execution, add it to the `execute_tests` block
+at the bottom of the page along with one or more groups of parameters to run
+with that test. When you execute `calculator_tests.py`, the script runs each
+test for every group of parameters associated with it.
 
 ### Utils
 

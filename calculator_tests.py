@@ -5,7 +5,7 @@
 from utils.test_runner import execute_tests
 
 # Import page object classes
-from pages.calculator import CalculatorPage
+from pages.calculator_page import CalculatorPage
 
 # ==================== Define test cases ====================
 
@@ -31,32 +31,32 @@ def test_calculator_operations(browser, operation, arg_1, arg_2, expected_result
         error_message = calculator.get_error_message()
         assert error_message == expected_result
 
-# def test_case_2():
+# def test_case_2(browser):
 #     pass
 
-# def test_case_3():
+# def test_case_3(browser):
 #     pass
 
 # ========== Define parameter groups and execute test suite ==========
 
 if __name__ == "__main__":
     execute_tests([
-        (test_calculator_operations, [
-            ("Chrome", "Add", "15", "30", "45", True),
-            ("Chrome", "Add", "5", "Five", "Number 2 is not a number", False),
-            # ("Chrome", "Subtract", "15", "40", "-25", True),
-            # ("Chrome", "Multiply", "8", "8", "64", True),
-            # ("Chrome", "Divide", "12", "3", "4", True),
-            # ("Chrome", "Concatenate", "12", "34", "1234", True),
-        ]),
-        # (test_case_2, [
-        #     (),
-        #     (),
-        #     (),
-        # ]),
+        [test_calculator_operations, [
+            ["Chrome", "Add", "15", "30", "45", True],
+            ["Chrome", "Add", "5", "Five", "Number 2 is not a number", False],
+            # ["Chrome", "Subtract", "15", "40", "-25", True],
+            # ["Chrome", "Multiply", "8", "8", "64", True],
+            # ["Chrome", "Divide", "12", "3", "4", True],
+            # ["Chrome", "Concatenate", "12", "34", "1234", True],
+        ]],
+        # [test_case_2, [
+        #     ["Chrome"],
+        #     ["Firefox"],
+        #     ["Edge"],
+        # ]],
         # (test_case_3, [
-        #     (),
-        #     (),
-        #     (),
+        #     ["Chrome"],
+        #     ["Firefox"],
+        #     ["Edge"],
         # ]),
     ])
