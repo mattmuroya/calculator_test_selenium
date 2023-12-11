@@ -51,12 +51,12 @@ if __name__ == "__main__":
         ]],
         # [test_case_2, [
         #     ["Chrome"],
-        #     ["Firefox"],
-        #     ["Edge"],
+        #     ["Chrome"],
+        #     ["Chrome"],
         # ]],
         # (test_case_3, [
         #     ["Chrome"],
-        #     ["Firefox"],
-        #     ["Edge"],
+        #     ["Chrome"],
+        #     ["Chrome"],
         # ]),
     ])

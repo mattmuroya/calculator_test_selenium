@@ -9,8 +9,8 @@ def create_driver(browser):
     # Initialize driver
     if browser == "Firefox":
         driver = selenium.webdriver.Firefox()
-    elif browser == "Edge":
-        driver = selenium.webdriver.Edge()
+    # elif browser == "Edge": # Disabled due to Edge WebDriver error
+    #     driver = selenium.webdriver.Edge()
     else: # Default to Chrome
         # Disable DevTools logging on Chrome
         options = selenium.webdriver.ChromeOptions()
