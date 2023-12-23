@@ -54,9 +54,9 @@ if __name__ == "__main__":
         #     ["Chrome"],
         #     ["Chrome"],
         # ]],
-        # (test_case_3, [
+        # [test_case_3, [
         #     ["Chrome"],
         #     ["Chrome"],
         #     ["Chrome"],
-        # ]),
+        # ]],
     ])
